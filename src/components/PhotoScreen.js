@@ -3,7 +3,7 @@ import {View, TouchableOpacity, StyleSheet, Text} from 'react-native';
 import {RNCamera} from 'react-native-camera';
 import PendingView from './PendingView';
 
-class PictureScreen extends React.Component {
+class PhotoScreen extends React.Component {
   state = {
     pausePreview: false,
     fd: true,
@@ -12,6 +12,7 @@ class PictureScreen extends React.Component {
 
   render() {
     const {pausePreview} = this.state;
+    console.log(RNCamera.Constants);
     return (
       <View style={styles.container}>
         <RNCamera
@@ -30,6 +31,9 @@ class PictureScreen extends React.Component {
               this.setState({faceData: JSON.stringify(face)});
               //alert(JSON.stringify(face));
             }
+          }}
+          onFaceDetectionError={(err) => {
+            console.log('err: ', err);
           }}
           androidCameraPermissionOptions={{
             title: 'Permission to use camera',
@@ -114,4 +118,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default PictureScreen;
+export default PhotoScreen;
